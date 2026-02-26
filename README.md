@@ -5,10 +5,8 @@
 [![CI](https://github.com/ofershap/tiny-limit/actions/workflows/ci.yml/badge.svg)](https://github.com/ofershap/tiny-limit/actions/workflows/ci.yml)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue.svg)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Bundle size](https://img.shields.io/badge/gzip-496_B-brightgreen)](https://github.com/ofershap/tiny-limit)
-[![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](https://github.com/ofershap/tiny-limit)
 
-Drop-in replacement for [`p-limit`](https://github.com/sindresorhus/p-limit) that works in both ESM and CommonJS.
+Run async functions with limited concurrency. Same API as [`p-limit`](https://github.com/sindresorhus/p-limit), but ships both ESM and CJS with zero dependencies.
 
 ```ts
 import { pLimit } from "tiny-limit";
@@ -17,21 +15,9 @@ const limit = pLimit(5);
 const results = await Promise.all(urls.map((url) => limit(() => fetch(url))));
 ```
 
-> Zero dependencies. 496 bytes gzipped. ESM + CJS dual export — no more pinning to p-limit v3.
+> 496 bytes gzipped. Zero dependencies.
 
 ![Demo](assets/demo.gif)
-
-## Why tiny-limit?
-
-[`p-limit`](https://github.com/sindresorhus/p-limit) has 148M weekly downloads but went ESM-only in v4, breaking thousands of CommonJS projects ([#57](https://github.com/sindresorhus/p-limit/issues/57), [#63](https://github.com/sindresorhus/p-limit/issues/63), [#69](https://github.com/sindresorhus/p-limit/issues/69)). It also pulls in `yocto-queue` as a dependency. `tiny-limit` ships ESM + CJS with zero dependencies.
-
-|              | `p-limit`              | `tiny-limit` |
-| ------------ | ---------------------- | ------------ |
-| CJS support  | v3 only (v4+ ESM-only) | ESM + CJS    |
-| Dependencies | `yocto-queue`          | 0            |
-| TypeScript   | native (v6+)           | native       |
-| API          | default export         | named export |
-| Size (gzip)  | 596B + yocto-queue     | 496B         |
 
 ## Install
 
@@ -73,31 +59,14 @@ limit.concurrency; // get or set the limit
 limit.clearQueue(); // discard pending tasks
 ```
 
-## API
+## Differences from `p-limit`
 
-### `pLimit(concurrency: number): LimitFunction`
-
-Returns a `limit` function that queues async work up to the given concurrency. Throws `TypeError` if concurrency is not a positive integer (or `Infinity`).
-
-### `limit(fn, ...args): Promise`
-
-Queues `fn(...args)` and returns a promise that resolves/rejects with the function's result.
-
-### `limit.activeCount: number`
-
-Number of promises currently running.
-
-### `limit.pendingCount: number`
-
-Number of promises waiting in the queue.
-
-### `limit.concurrency: number`
-
-Get or set the concurrency limit at runtime.
-
-### `limit.clearQueue(): void`
-
-Discards all pending (not yet started) tasks.
+|              | `p-limit`              | `tiny-limit` |
+| ------------ | ---------------------- | ------------ |
+| CJS support  | v3 only (v4+ ESM-only) | ESM + CJS    |
+| Dependencies | `yocto-queue`          | 0            |
+| TypeScript   | native (v6+)           | native       |
+| Export       | default                | named        |
 
 ## Migrating from p-limit
 
@@ -106,7 +75,33 @@ Discards all pending (not yet started) tasks.
 + import { pLimit } from "tiny-limit";
 ```
 
-One line. The API is compatible.
+One line. The rest of your code stays the same.
+
+## API
+
+### `pLimit(concurrency: number): LimitFunction`
+
+Returns a `limit` function that queues async work up to the given concurrency. Throws if concurrency is not a positive integer (or `Infinity`).
+
+### `limit(fn, ...args): Promise`
+
+Queues `fn(...args)` and returns a promise.
+
+### `limit.activeCount`
+
+Number of promises currently running.
+
+### `limit.pendingCount`
+
+Number of promises waiting in the queue.
+
+### `limit.concurrency`
+
+Get or set the concurrency limit at runtime.
+
+### `limit.clearQueue()`
+
+Discards all pending tasks.
 
 ## Author
 
