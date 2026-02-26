@@ -94,6 +94,8 @@ export function pLimit(concurrency: number): LimitFunction {
   return generator as LimitFunction;
 }
 
+export default pLimit;
+
 function validateConcurrency(value: number): void {
   if (
     !(
