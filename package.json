@@ -1,6 +1,6 @@
 {
   "name": "tiny-limit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Run async functions with limited concurrency. Same API as p-limit, ships ESM + CJS with zero dependencies.",
   "type": "module",
   "exports": {
