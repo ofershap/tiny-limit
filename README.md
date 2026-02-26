@@ -8,7 +8,7 @@
 [![Bundle size](https://img.shields.io/badge/gzip-496_B-brightgreen)](https://github.com/ofershap/tiny-limit)
 [![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](https://github.com/ofershap/tiny-limit)
 
-Run async functions with limited concurrency. A modern, zero-dependency replacement for [`p-limit`](https://github.com/sindresorhus/p-limit).
+Drop-in replacement for [`p-limit`](https://github.com/sindresorhus/p-limit) that works in both ESM and CommonJS.
 
 ```ts
 import { pLimit } from "tiny-limit";
@@ -17,18 +17,21 @@ const limit = pLimit(5);
 const results = await Promise.all(urls.map((url) => limit(() => fetch(url))));
 ```
 
-> Native TypeScript. ESM + CJS dual export. Zero dependencies. 496 bytes gzipped.
+> Zero dependencies. 496 bytes gzipped. ESM + CJS dual export — no more pinning to p-limit v3.
+
+![Demo](assets/demo.gif)
 
 ## Why tiny-limit?
 
-[`p-limit`](https://github.com/sindresorhus/p-limit) has 148M weekly downloads but went ESM-only in v4, breaking CommonJS projects ([#57](https://github.com/sindresorhus/p-limit/issues/57), [#63](https://github.com/sindresorhus/p-limit/issues/63), [#69](https://github.com/sindresorhus/p-limit/issues/69)). It also depends on `yocto-queue`. `tiny-limit` ships ESM + CJS with zero dependencies.
+[`p-limit`](https://github.com/sindresorhus/p-limit) has 148M weekly downloads but went ESM-only in v4, breaking thousands of CommonJS projects ([#57](https://github.com/sindresorhus/p-limit/issues/57), [#63](https://github.com/sindresorhus/p-limit/issues/63), [#69](https://github.com/sindresorhus/p-limit/issues/69)). It also pulls in `yocto-queue` as a dependency. `tiny-limit` ships ESM + CJS with zero dependencies.
 
 |              | `p-limit`              | `tiny-limit` |
 | ------------ | ---------------------- | ------------ |
 | CJS support  | v3 only (v4+ ESM-only) | ESM + CJS    |
 | Dependencies | `yocto-queue`          | 0            |
-| TypeScript   | native                 | native       |
+| TypeScript   | native (v6+)           | native       |
 | API          | default export         | named export |
+| Size (gzip)  | 596B + yocto-queue     | 496B         |
 
 ## Install
 
@@ -51,7 +54,6 @@ const input = [
   limit(() => fetchUser(5)),
 ];
 
-// At most 3 run concurrently
 const users = await Promise.all(input);
 ```
 
@@ -75,7 +77,7 @@ limit.clearQueue(); // discard pending tasks
 
 ### `pLimit(concurrency: number): LimitFunction`
 
-Returns a `limit` function that queues async work up to the given concurrency.
+Returns a `limit` function that queues async work up to the given concurrency. Throws `TypeError` if concurrency is not a positive integer (or `Infinity`).
 
 ### `limit(fn, ...args): Promise`
 
@@ -104,7 +106,7 @@ Discards all pending (not yet started) tasks.
 + import { pLimit } from "tiny-limit";
 ```
 
-That's it. The API is compatible.
+One line. The API is compatible.
 
 ## Author
 
@@ -115,4 +117,4 @@ That's it. The API is compatible.
 
 ## License
 
-MIT
+[MIT](LICENSE) &copy; [Ofer Shapira](https://github.com/ofershap)

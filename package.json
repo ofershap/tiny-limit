@@ -70,7 +70,8 @@
     "async",
     "queue",
     "throttle",
-    "tiny",
+    "rate-limit",
+    "drop-in-replacement",
     "typescript",
     "esm",
     "zero-dependency"
