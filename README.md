@@ -61,6 +61,8 @@ limit.clearQueue(); // discard pending tasks
 
 ## Differences from `p-limit`
 
+`p-limit` v4+ is ESM-only. If you `require("p-limit")` in a CommonJS project, you get `ERR_REQUIRE_ESM`. `tiny-limit` works with both `import` and `require()`.
+
 |              | `p-limit`              | `tiny-limit` |
 | ------------ | ---------------------- | ------------ |
 | CJS support  | v3 only (v4+ ESM-only) | ESM + CJS    |

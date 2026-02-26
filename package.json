@@ -1,6 +1,6 @@
 {
   "name": "tiny-limit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Run async functions with limited concurrency. Same API as p-limit, ships ESM + CJS with zero dependencies.",
   "type": "module",
   "exports": {
@@ -71,9 +71,12 @@
     "queue",
     "throttle",
     "rate-limit",
-    "drop-in-replacement",
+    "commonjs",
+    "dual-package",
+    "err-require-esm",
     "typescript",
     "esm",
+    "cjs",
     "zero-dependency"
   ],
   "author": "Ofer Shapira <ofer@ofershap.dev>",
