@@ -19,6 +19,8 @@ const results = await Promise.all(urls.map((url) => limit(() => fetch(url))));
 
 ![Demo](assets/demo.gif)
 
+<sub>Demo built with <a href="https://github.com/ofershap/remotion-readme-kit">remotion-readme-kit</a></sub>
+
 ## Install
 
 ```bash
