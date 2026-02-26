@@ -14,9 +14,7 @@ Run async functions with limited concurrency. A modern, zero-dependency replacem
 import { pLimit } from "tiny-limit";
 
 const limit = pLimit(5);
-const results = await Promise.all(
-  urls.map(url => limit(() => fetch(url)))
-);
+const results = await Promise.all(urls.map((url) => limit(() => fetch(url))));
 ```
 
 > Native TypeScript. ESM + CJS dual export. Zero dependencies. 496 bytes gzipped.
@@ -25,12 +23,12 @@ const results = await Promise.all(
 
 [`p-limit`](https://github.com/sindresorhus/p-limit) has 148M weekly downloads but went ESM-only in v4, breaking CommonJS projects ([#57](https://github.com/sindresorhus/p-limit/issues/57), [#63](https://github.com/sindresorhus/p-limit/issues/63), [#69](https://github.com/sindresorhus/p-limit/issues/69)). It also depends on `yocto-queue`. `tiny-limit` ships ESM + CJS with zero dependencies.
 
-| | `p-limit` | `tiny-limit` |
-|---|---|---|
-| CJS support | v3 only (v4+ ESM-only) | ESM + CJS |
-| Dependencies | `yocto-queue` | 0 |
-| TypeScript | native | native |
-| API | default export | named export |
+|              | `p-limit`              | `tiny-limit` |
+| ------------ | ---------------------- | ------------ |
+| CJS support  | v3 only (v4+ ESM-only) | ESM + CJS    |
+| Dependencies | `yocto-queue`          | 0            |
+| TypeScript   | native                 | native       |
+| API          | default export         | named export |
 
 ## Install
 
@@ -67,10 +65,10 @@ const result = await limit(fetch, "https://example.com");
 ### Inspect the queue
 
 ```ts
-limit.activeCount;   // currently running
-limit.pendingCount;  // waiting in queue
-limit.concurrency;   // get or set the limit
-limit.clearQueue();  // discard pending tasks
+limit.activeCount; // currently running
+limit.pendingCount; // waiting in queue
+limit.concurrency; // get or set the limit
+limit.clearQueue(); // discard pending tasks
 ```
 
 ## API
