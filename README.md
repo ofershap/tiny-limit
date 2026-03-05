@@ -107,12 +107,31 @@ Get or set the concurrency limit at runtime.
 
 Discards all pending tasks.
 
+## The tiny-\* family
+
+Drop-in replacements for sindresorhus async utilities. All ship ESM + CJS with zero dependencies.
+
+| Package                                                | Replaces             | What it does                   |
+| ------------------------------------------------------ | -------------------- | ------------------------------ |
+| **tiny-limit**                                         | p-limit              | Concurrency limiter            |
+| [tiny-map](https://github.com/ofershap/tiny-map)       | p-map                | Concurrent map with order      |
+| [tiny-retry](https://github.com/ofershap/tiny-retry)   | p-retry              | Retry with exponential backoff |
+| [tiny-queue](https://github.com/ofershap/tiny-queue)   | p-queue              | Priority task queue            |
+| [tiny-ms](https://github.com/ofershap/tiny-ms)         | ms                   | Parse/format durations         |
+| [tiny-escape](https://github.com/ofershap/tiny-escape) | escape-string-regexp | Escape regex chars             |
+
+Want all async utilities in one import? Use [`tiny-async-kit`](https://github.com/ofershap/tiny-async).
+
 ## Author
 
 [![Made by ofershap](https://gitshow.dev/api/card/ofershap)](https://gitshow.dev/ofershap)
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/ofershap)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=flat&logo=github&logoColor=white)](https://github.com/ofershap)
+
+---
+
+If this saved you from `ERR_REQUIRE_ESM`, [star the repo](https://github.com/ofershap/tiny-limit) or [open an issue](https://github.com/ofershap/tiny-limit/issues) if something breaks.
 
 ## License
 
